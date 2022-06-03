@@ -9,7 +9,7 @@ import (
 	test_structure "github.com/gruntwork-io/terratest/modules/test-structure"
 )
 
-func TestPlanWindows(t *testing.T) {
+func TestPlanSingleDisk(t *testing.T) {
 	t.Parallel()
 
 	// Root folder where Terraform files should be (relative to the test folder)
@@ -23,10 +23,8 @@ func TestPlanWindows(t *testing.T) {
 
 	// Generate a random deployment name for the test to prevent a naming conflict
 	uniqueID := random.UniqueId()
-	testREF := "Windows"
+	testREF := "SingleDisk"
 	serviceDeployment := testREF + "-" + uniqueID
-	operatingSystemPlatform := "Windows"
-	resourceVmSku := "2022-datacenter-smalldisk-g2"
 
 	// Define variables
 	location := "UK South"
@@ -39,11 +37,10 @@ func TestPlanWindows(t *testing.T) {
 
 		// Variables to pass to the Terraform code using -var options
 		Vars: map[string]interface{}{
-			"service_deployment":        serviceDeployment,
-			"resource_instance_count":   1,
-			"service_location":          location,
-			"operating_system_platform": operatingSystemPlatform,
-			"resource_vm_sku":           resourceVmSku,
+			"service_deployment":       serviceDeployment,
+			"resource_instance_count":  1,
+			"service_location":         location,
+			"resource_data_disk_count": 1,
 		},
 	})
 
@@ -51,7 +48,7 @@ func TestPlanWindows(t *testing.T) {
 	terraform.InitAndPlan(t, terraformOptions)
 }
 
-func TestPlanLinux(t *testing.T) {
+func TestPlanMultiDisk(t *testing.T) {
 	t.Parallel()
 
 	// Root folder where Terraform files should be (relative to the test folder)
@@ -65,7 +62,7 @@ func TestPlanLinux(t *testing.T) {
 
 	// Generate a random deployment name for the test to prevent a naming conflict
 	uniqueID := random.UniqueId()
-	testREF := "Linux"
+	testREF := "MultiDisk"
 	serviceDeployment := testREF + "-" + uniqueID
 
 	// Define variables
@@ -79,9 +76,10 @@ func TestPlanLinux(t *testing.T) {
 
 		// Variables to pass to the Terraform code using -var options
 		Vars: map[string]interface{}{
-			"service_deployment":      serviceDeployment,
-			"resource_instance_count": 1,
-			"service_location":        location,
+			"service_deployment":       serviceDeployment,
+			"resource_instance_count":  1,
+			"service_location":         location,
+			"resource_data_disk_count": 2,
 		},
 	})
 

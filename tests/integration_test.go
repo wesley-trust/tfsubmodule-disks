@@ -37,10 +37,10 @@ func TestApplySingleDisk(t *testing.T) {
 
 		// Variables to pass to the Terraform code using -var options
 		Vars: map[string]interface{}{
-			"service_deployment":        serviceDeployment,
-			"resource_instance_count":   1,
-			"service_location":          location,
-			"resource_data_disk_count" : 1,
+			"service_deployment":       serviceDeployment,
+			"resource_instance_count":  1,
+			"service_location":         location,
+			"resource_data_disk_count": 1,
 		},
 	})
 
@@ -79,10 +79,10 @@ func TestApplyMultiDisk(t *testing.T) {
 
 		// Variables to pass to the Terraform code using -var options
 		Vars: map[string]interface{}{
-			"service_deployment":      serviceDeployment,
-			"resource_instance_count": 1,
-			"service_location":        location,
-			"resource_data_disk_count" : 2,
+			"service_deployment":       serviceDeployment,
+			"resource_instance_count":  1,
+			"service_location":         location,
+			"resource_data_disk_count": 2,
 		},
 	})
 

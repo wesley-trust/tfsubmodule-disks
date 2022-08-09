@@ -38,7 +38,7 @@ resources:
   #    stages:
   #    - Regression
   - pipeline: 'Virtual Machine'  
-    source: tfsubmodule-virtual_machine
+    source: ENV-P;REF-latest; tfsubmodule-virtual_machine
     trigger:    
       stages:
       - Regression
